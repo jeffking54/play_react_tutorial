@@ -1,6 +1,4 @@
-// tutorial1.js
-// tutorial2.js
-// tutorial5.js
+
 var converter = new Showdown.converter();
 
 var Comment = React.createClass({
@@ -8,23 +6,23 @@ var Comment = React.createClass({
             var rawMarkup = converter.makeHtml(this.props.children.toString());
             return (
                 <div className="comment">
-            <h2 className="commentAuthor">
-            {this.props.author}
-        </h2>
-            <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
-    </div>
-);
+                    <h2 className="commentAuthor">
+                    {this.props.author}
+                  </h2>
+                  <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+         </div>
+    );
 }
 });
 
 var CommentList = React.createClass({
     render: function() {
-        var commentNodes = this.props.data.map(function (comment) {
+        var commentNodes = this.props.daterbaseers.map(function (comment) {
             return (
                 <Comment author={comment.id}>
                     {comment.name}
                 </Comment>
-        );
+            );
         });
         return (
             <div className="commentList">
@@ -59,6 +57,10 @@ var CommentBox = React.createClass({
     },
 
     handleCommentSubmit: function(comment) {
+        var comments = this.state.data;
+        var newComments = comments.concat([comment]);
+        this.setState({data: newComments});
+
         $.ajax({
             url: this.props.url,
             dataType: 'json',
@@ -94,10 +96,9 @@ var CommentBox = React.createClass({
     render: function() {
         return (
             <div className="commentBox">
-        <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
-
-        </div>
+                <CommentList daterbaseers={this.state.data} />
+                <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+            </div>
         );
     }
 });
