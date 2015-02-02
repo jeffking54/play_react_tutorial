@@ -10,9 +10,9 @@ import javax.persistence.Id;
 public class Person extends Model {
 
     @Id
-    private String id;
+    public String id;
 
-    private String name;
+    public String name;
 
     public String getId() {
         return id;
