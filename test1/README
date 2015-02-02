@@ -1,1 +1,7 @@
 Play Framework + React
+
+Dependency
+
+npm install -g react-tools
+
+Use jsx --watch public/javascripts/react public/javascripts
